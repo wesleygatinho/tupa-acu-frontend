@@ -44,7 +44,7 @@ const AccountSuspendedPage = () => {
 
   const handleContactAdmin = () => {
     // Aqui você pode implementar um modal de contato ou redirecionar para email
-    window.location.href = 'mailto:admin@seduc.ma.gov.br?subject=Solicitação de Ativação de Conta&body=Olá, preciso de ajuda com minha conta no SISREC.';
+    window.location.href = 'mailto:admin@seduc.ma.gov.br?subject=Solicitação de Ativação de Conta&body=Olá, preciso de ajuda com minha conta no TUPA-AÇU.';
   };
 
   return (

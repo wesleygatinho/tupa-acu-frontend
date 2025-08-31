@@ -38,7 +38,7 @@ const HelpPage = () => (
           Central de Ajuda
         </h1>
         <p className="text-muted">
-          Dúvidas frequentes e informações úteis sobre o SISREC
+          Dúvidas frequentes e informações úteis sobre o TUPA-AÇU
         </p>
       </div>
 
@@ -72,11 +72,11 @@ const HelpPage = () => (
             <Card.Body>
               <p>
                 Precisa de ajuda? Entre em contato com o suporte técnico:<br />
-                <strong>Email:</strong> suporte.sisrec@seduc.ma.gov.br<br />
+                <strong>Email:</strong> suporte.tupacu@seduc.ma.gov.br<br />
                 <strong>Telefone:</strong> (98) 3131-0000
               </p>
               <p>
-                <a href="mailto:suporte.sisrec@seduc.ma.gov.br" className="btn btn-primary">
+                <a href="mailto:suporte.tupacu@seduc.ma.gov.br" className="btn btn-primary">
                   <i className="fas fa-envelope me-2"></i>
                   Enviar Email
                 </a>

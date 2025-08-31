@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Container, Row, Col, Card, Form, Button, Alert, InputGroup, Spinner } from 'react-bootstrap';
+import { Form, Button, Alert, InputGroup, Spinner } from 'react-bootstrap';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 import { authService } from '../../../services/api/authService';
+import AuthLayout from '../AuthLayout/AuthLayout';
 import Loading from '../../common/Loading/Loading';
-import './ForgotPassword.css';
 
 // Schema de validação
 const forgotSchema = yup.object({
@@ -57,113 +57,86 @@ const ForgotPassword = () => {
     }
   };
 
+  const formContent = (
+    <>
+      <div className="text-center mb-4">
+        <h3 className="auth-title">Recuperar Senha</h3>
+        <p className="auth-subtitle text-muted">
+          Informe seu email para receber o link de redefinição
+        </p>
+      </div>
+      {successMsg && (
+        <Alert variant="success" className="mb-3">{successMsg}</Alert>
+      )}
+      {errorMsg && (
+        <Alert variant="danger" className="mb-3">{errorMsg}</Alert>
+      )}
+      <Form onSubmit={handleSubmit(onSubmit)} noValidate>
+        <Form.Group className="mb-4">
+          <Form.Label>Email</Form.Label>
+          <InputGroup>
+            <InputGroup.Text>
+              <i className="fas fa-envelope"></i>
+            </InputGroup.Text>
+            <Form.Control
+              type="email"
+              placeholder="Digite seu email cadastrado"
+              {...register('email')}
+              isInvalid={!!errors.email}
+              autoComplete="email"
+            />
+          </InputGroup>
+          {errors.email && (
+            <Form.Control.Feedback type="invalid">
+              {errors.email.message}
+            </Form.Control.Feedback>
+          )}
+        </Form.Group>
+        <Button
+          type="submit"
+          variant="primary"
+          size="lg"
+          className="w-100 auth-btn"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                className="me-2"
+              />
+              Enviando...
+            </>
+          ) : (
+            <>
+              <i className="fas fa-paper-plane me-2"></i>
+              Enviar link de recuperação
+            </>
+          )}
+        </Button>
+      </Form>
+      <div className="text-center mt-4">
+        <Link 
+          to="/login" 
+          className="text-decoration-none fw-bold auth-link"
+        >
+          <i className="fas fa-arrow-left me-2"></i>
+          Voltar para Login
+        </Link>
+      </div>
+    </>
+  );
+
   return (
-    <div className="forgot-password-page">
-      <Container fluid>
-        <Row className="min-vh-100">
-          {/* Lado esquerdo: informações */}
-          <Col lg={6} className="forgot-info-side d-none d-lg-flex">
-            <div className="forgot-info-content">
-              <div className="logo-container mb-4">
-                <img 
-                  src="/logo-seduc.png" 
-                  alt="SEDUC/MA" 
-                  className="logo-img"
-                  onError={e => e.target.style.display = 'none'}
-                />
-                <h1 className="logo-text">TUPÃ-AÇU</h1>
-              </div>
-              <h2 className="info-title">
-                Recuperação de senha
-              </h2>
-              
-            </div>
-          </Col>
-          {/* Formulário à direita */}
-          <Col lg={6} className="forgot-form-side">
-            <div className="forgot-form-container">
-              <Card className="forgot-card">
-                <Card.Body className="p-5">
-                  <div className="text-center mb-4">
-                    <h3 className="forgot-title">Recuperar Senha</h3>
-                    <p className="forgot-subtitle text-muted">
-                      Informe seu email para receber o link de redefinição
-                    </p>
-                  </div>
-                  {successMsg && (
-                    <Alert variant="success" className="mb-3">{successMsg}</Alert>
-                  )}
-                  {errorMsg && (
-                    <Alert variant="danger" className="mb-3">{errorMsg}</Alert>
-                  )}
-                  <Form onSubmit={handleSubmit(onSubmit)} noValidate>
-                    <Form.Group className="mb-4">
-                      <Form.Label>Email</Form.Label>
-                      <InputGroup>
-                        <InputGroup.Text>
-                          <i className="fas fa-envelope"></i>
-                        </InputGroup.Text>
-                        <Form.Control
-                          type="email"
-                          placeholder="Digite seu email cadastrado"
-                          {...register('email')}
-                          isInvalid={!!errors.email}
-                          autoComplete="email"
-                        />
-                      </InputGroup>
-                      {errors.email && (
-                        <Form.Control.Feedback type="invalid">
-                          {errors.email.message}
-                        </Form.Control.Feedback>
-                      )}
-                    </Form.Group>
-                    <Button
-                      type="submit"
-                      variant="primary"
-                      size="lg"
-                      className="w-100 forgot-btn"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? (
-                        <>
-                          <Spinner
-                            as="span"
-                            animation="border"
-                            size="sm"
-                            role="status"
-                            className="me-2"
-                          />
-                          Enviando...
-                        </>
-                      ) : (
-                        <>
-                          <i className="fas fa-paper-plane me-2"></i>
-                          Enviar link de recuperação
-                        </>
-                      )}
-                    </Button>
-                  </Form>
-                  <div className="text-center mt-4">
-                    <Link 
-                      to="/login" 
-                      className="text-decoration-none fw-bold"
-                    >
-                      <i className="fas fa-arrow-left me-2"></i>
-                      Voltar para Login
-                    </Link>
-                  </div>
-                </Card.Body>
-              </Card>
-              <div className="text-center mt-3">
-                <small className="text-muted">
-                  © 2024 SEDUC/MA - Sistema de Recepção v1.0.0
-                </small>
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <AuthLayout 
+      title="Recuperação de senha"
+      subtitle="Esqueceu sua senha? Não se preocupe, vamos ajudá-lo a recuperar o acesso."
+    >
+      {formContent}
+    </AuthLayout>
   );
 };
 

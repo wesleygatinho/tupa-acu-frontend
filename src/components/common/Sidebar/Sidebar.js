@@ -129,7 +129,7 @@ const Sidebar = ({ collapsed, show, onHide }) => {
           />
           {!collapsed && (
             <div className="brand-text">
-              <span className="brand-title">SISREC</span>
+              <span className="brand-title">TUPA-AÇU</span>
               <span className="brand-subtitle">Sistema de Recepção</span>
             </div>
           )}
@@ -267,7 +267,7 @@ const Sidebar = ({ collapsed, show, onHide }) => {
             </div>
           </div>
           <div className="sidebar-version">
-            <small>SISREC v1.0.0</small>
+            <small>TUPA-AÇU v1.0.0</small>
           </div>
         </div>
       )}

@@ -112,30 +112,11 @@ const Header = ({ sidebarCollapsed, toggleSidebar, onMobileMenuToggle }) => {
                 e.target.style.display = 'none';
               }}
             />
-            <span className="header-title">SISREC</span>
-          </div>
-
-          {/* Barra de pesquisa (desktop) */}
-          <div className="header-search d-none d-md-block">
-            <div className="search-input-group">
-              <i className="fas fa-search search-icon"></i>
-              <input
-                type="text"
-                className="search-input"
-                placeholder="Buscar visitantes, servidores..."
-              />
-            </div>
+            <span className="header-title">TUPA-AÇU</span>
           </div>
 
           {/* Menu direito */}
           <div className="header-actions">
-            {/* Botão de pesquisa mobile */}
-            <Button
-              variant="link"
-              className="d-md-none header-action-btn"
-            >
-              <i className="fas fa-search"></i>
-            </Button>
 
             {/* Notificações */}
             <div className="notification-wrapper">

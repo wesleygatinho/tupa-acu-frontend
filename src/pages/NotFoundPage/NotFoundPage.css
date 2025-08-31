@@ -1,15 +1,30 @@
+:root {
+  --tupa-blue: #1e40af;
+  --tupa-sand: #f59e0b;
+}
+
 .not-found-page {
   min-height: 100vh;
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  background: linear-gradient(135deg, var(--tupa-blue) 0%, var(--tupa-sand) 100%);
   display: flex;
   align-items: center;
   padding: 2rem 0;
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
 .notfound-card {
   border: none;
-  box-shadow: 0 20px 40px rgba(0,0,0,0.10);
-  border-radius: 1rem;
+  backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.1);
+  border-radius: 1.5rem;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.notfound-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 35px 70px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255, 255, 255, 0.15);
 }
 
 .notfound-emoji {
@@ -18,17 +33,19 @@
 }
 
 .notfound-title {
-  color: #1e3a8a;
+  color: var(--tupa-blue);
   font-size: 2.3rem;
-  font-weight: bold;
+  font-weight: 700;
   margin-bottom: 1rem;
+  letter-spacing: -0.02em;
 }
 
 .notfound-description {
   font-size: 1.1rem;
-  color: #6b7280;
+  color: #64748b;
   margin-bottom: 2rem;
-  line-height: 1.6;
+  line-height: 1.7;
+  font-weight: 400;
 }
 
 .notfound-actions {
@@ -41,9 +58,15 @@
 }
 
 .notfound-help a {
-  color: #1e3a8a;
-  font-weight: 500;
+  color: var(--tupa-blue);
+  font-weight: 600;
   font-size: 0.98rem;
+  transition: all 0.2s ease;
+}
+
+.notfound-help a:hover {
+  color: var(--tupa-sand);
+  text-decoration: none;
 }
 
 @media (max-width: 767.98px) {

@@ -163,7 +163,7 @@ const HomePage = () => {
                   {getGreeting()}, {user?.nome?.split(' ')[0]}! 👋
                 </h1>
                 <p className="welcome-subtitle">
-                  Bem-vindo(a) ao SISREC - Sistema de Recepção da SEDUC/MA
+                  Bem-vindo(a) ao TUPA-AÇU - Sistema de Recepção da SEDUC/MA
                 </p>
                 <div className="user-role-badge">
                   <Badge bg="primary" className="px-3 py-2">
@@ -376,7 +376,7 @@ const HomePage = () => {
                   </Col>
                   <Col md={3} className="mb-2">
                     <a 
-                      href="mailto:suporte.sisrec@seduc.ma.gov.br" 
+                      href="mailto:suporte.tupacu@seduc.ma.gov.br" 
                       className="useful-link"
                     >
                       <i className="fas fa-envelope me-2"></i>

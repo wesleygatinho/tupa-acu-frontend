@@ -60,7 +60,7 @@ const DashboardPage = () => {
                 Dashboard
               </h1>
               <p className="text-muted">
-                Visão geral das visitas, servidores e setores do SISREC
+                Visão geral das visitas, servidores e setores do TUPA-AÇU
               </p>
             </Col>
             <Col xs="auto" className="d-none d-md-block">

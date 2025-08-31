@@ -1,0 +1,55 @@
+.auth-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 1rem 2rem;
+  font-size: 0.85rem;
+  z-index: 10;
+}
+
+.auth-footer-content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-left .copyright {
+  color: #64748b;
+  font-weight: 500;
+}
+
+.footer-right .version-info {
+  color: #1e40af;
+  font-weight: 600;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .auth-footer {
+    padding: 0.75rem 1rem;
+  }
+  
+  .auth-footer-content {
+    flex-direction: column;
+    gap: 0.5rem;
+    text-align: center;
+  }
+  
+  .footer-left,
+  .footer-right {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-footer {
+    font-size: 0.75rem;
+  }
+}

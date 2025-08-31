@@ -13,7 +13,7 @@ const SettingsPage = () => {
   const [activeTab, setActiveTab] = useState('system');
   const [isLoading, setIsLoading] = useState(false);
   const [systemSettings, setSystemSettings] = useState({
-    siteName: 'SISREC',
+    siteName: 'TUPA-AÇU',
     siteDescription: 'Sistema de Recepção - SEDUC/MA',
     maxVisitorsPerDay: 50,
     defaultVisitDuration: 60,
@@ -28,7 +28,7 @@ const SettingsPage = () => {
     smtpUser: '',
     smtpPassword: '',
     fromEmail: 'noreply@seduc.ma.gov.br',
-    fromName: 'SISREC - SEDUC/MA'
+    fromName: 'TUPA-AÇU - SEDUC/MA'
   });
   const [showTestEmail, setShowTestEmail] = useState(false);
   const [testEmailAddress, setTestEmailAddress] = useState('');
@@ -157,7 +157,7 @@ const SettingsPage = () => {
     const dataStr = JSON.stringify(systemLogs, null, 2);
     const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
     
-    const exportFileDefaultName = `sisrec-logs-${new Date().toISOString().split('T')[0]}.json`;
+    const exportFileDefaultName = `tupacu-logs-${new Date().toISOString().split('T')[0]}.json`;
     
     const linkElement = document.createElement('a');
     linkElement.setAttribute('href', dataUri);
@@ -208,7 +208,7 @@ const SettingsPage = () => {
                 Configurações do Sistema
               </h1>
               <p className="text-muted">
-                Gerencie as configurações gerais do SISREC
+                Gerencie as configurações gerais do TUPA-AÇU
               </p>
             </Col>
           </Row>
@@ -439,7 +439,7 @@ const SettingsPage = () => {
                                 type="text"
                                 value={emailSettings.fromName}
                                 onChange={(e) => handleEmailSettingsChange('fromName', e.target.value)}
-                                placeholder="SISREC - SEDUC/MA"
+                                placeholder="TUPA-AÇU - SEDUC/MA"
                               />
                             </Form.Group>
                           </Col>

@@ -30,7 +30,7 @@ const PrivateRoute = ({ children, requiredRoles = [], allowedStatuses = ['ATIVO'
         to="/account-suspended" 
         state={{ 
           reason: user?.statusConta,
-          message: 'Sua conta não está ativa. Entre em contato com o administrador.' 
+          message: 'Sua conta não está ativa. Acesse seu email e valide sua conta.' 
         }}
         replace 
       />

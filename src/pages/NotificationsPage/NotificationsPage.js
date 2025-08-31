@@ -128,7 +128,7 @@ const NotificationsPage = () => {
           tipo: NOTIFICATION_TYPES.REUNIAO,
           remetente: {
             id: 2,
-            nome: 'Sistema SISREC',
+            nome: 'Sistema TUPA-AÇU',
             email: 'sistema@seduc.ma.gov.br'
           },
           destinatario: {
@@ -208,7 +208,7 @@ const NotificationsPage = () => {
           tipo: NOTIFICATION_TYPES.ANIVERSARIO,
           remetente: {
             id: 2,
-            nome: 'Sistema SISREC',
+            nome: 'Sistema TUPA-AÇU',
             email: 'sistema@seduc.ma.gov.br'
           },
           destinatario: {

@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Row, Col, Card, Form, Button, Alert, InputGroup, Spinner } from 'react-bootstrap';
+import { Form, Button, Alert, InputGroup, Spinner } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { authService } from '../../../services/api/authService';
+import AuthLayout from '../AuthLayout/AuthLayout';
 // import { handleCPFInput, handlePhoneInput, removeFormatting } from '../../../services/utils/formatters';
-import './Register.css';
 
 const Register = () => {
   const [formData, setFormData] = useState({
@@ -143,239 +143,216 @@ const Register = () => {
     return value;
   };
 
+  const formContent = (
+    <>
+      {/* <div className="text-center mb-4">
+        <h3 className="auth-form-title">Crie sua conta</h3>
+      </div> */}
+
+      {localError && (
+        <Alert variant="danger" className="mb-4" dismissible onClose={() => setLocalError('')}>
+          <i className="fas fa-exclamation-triangle me-2"></i>
+          {localError}
+        </Alert>
+      )}
+
+      <Form onSubmit={handleSubmit} noValidate>
+        {/* Nome Completo - Campo completo */}
+        <div className="auth-form-col-full">
+          <Form.Group>
+            <Form.Label>Nome Completo</Form.Label>
+            <InputGroup>
+              
+              <Form.Control
+                type="text"
+                name="nome"
+                placeholder="Seu nome completo"
+                value={formData.nome}
+                onChange={handleInputChange}
+                isInvalid={!!fieldErrors.nome}
+                disabled={isLoading}
+              />
+            </InputGroup>
+            {fieldErrors.nome && (
+              <Form.Control.Feedback type="invalid">
+                {fieldErrors.nome}
+              </Form.Control.Feedback>
+            )}
+          </Form.Group>
+        </div>
+        
+        {/* Email - Campo completo */}
+        <div className="auth-form-col-full">
+          <Form.Group>
+            <Form.Label>Email</Form.Label>
+            <InputGroup>
+              
+              <Form.Control
+                type="email"
+                name="email"
+                placeholder="seu@email.com"
+                value={formData.email}
+                onChange={handleInputChange}
+                isInvalid={!!fieldErrors.email}
+                disabled={isLoading}
+              />
+            </InputGroup>
+            {fieldErrors.email && (
+              <Form.Control.Feedback type="invalid">
+                {fieldErrors.email}
+              </Form.Control.Feedback>
+            )}
+          </Form.Group>
+        </div>
+        
+        {/* CPF e Celular - Duas colunas */}
+        <div className="auth-form-row">
+          <div className="auth-form-col">
+            <Form.Group>
+              <Form.Label>CPF</Form.Label>
+              <InputGroup>
+                
+                <Form.Control
+                  type="text"
+                  name="cpf"
+                  placeholder="000.000.000-00"
+                  value={getDisplayValue('cpf', formData.cpf)}
+                  onChange={handleInputChange}
+                  isInvalid={!!fieldErrors.cpf}
+                  disabled={isLoading}
+                  maxLength={14}
+                />
+              </InputGroup>
+              {fieldErrors.cpf && (
+                <Form.Control.Feedback type="invalid">
+                  {fieldErrors.cpf}
+                </Form.Control.Feedback>
+              )}
+            </Form.Group>
+          </div>
+          
+          <div className="auth-form-col">
+            <Form.Group>
+              <Form.Label>Celular</Form.Label>
+              <InputGroup>
+                
+                <Form.Control
+                  type="text"
+                  name="celular"
+                  placeholder="(99) 99999-9999"
+                  value={getDisplayValue('celular', formData.celular)}
+                  onChange={handleInputChange}
+                  isInvalid={!!fieldErrors.celular}
+                  disabled={isLoading}
+                  maxLength={15}
+                />
+              </InputGroup>
+              {fieldErrors.celular && (
+                <Form.Control.Feedback type="invalid">
+                  {fieldErrors.celular}
+                </Form.Control.Feedback>
+              )}
+            </Form.Group>
+          </div>
+        </div>
+        
+        {/* Senha e Confirmar Senha - Duas colunas */}
+        <div className="auth-form-row">
+          <div className="auth-form-col">
+            <Form.Group>
+              <Form.Label>Senha</Form.Label>
+              <InputGroup>
+                
+                <Form.Control
+                  type="password"
+                  name="senha"
+                  placeholder="Mínimo 6 caracteres"
+                  value={formData.senha}
+                  onChange={handleInputChange}
+                  isInvalid={!!fieldErrors.senha}
+                  disabled={isLoading}
+                />
+              </InputGroup>
+              {fieldErrors.senha && (
+                <Form.Control.Feedback type="invalid">
+                  {fieldErrors.senha}
+                </Form.Control.Feedback>
+              )}
+            </Form.Group>
+          </div>
+          
+          <div className="auth-form-col">
+            <Form.Group>
+              <Form.Label>Confirmar Senha</Form.Label>
+              <InputGroup>
+                
+                <Form.Control
+                  type="password"
+                  name="confirmarSenha"
+                  placeholder="Digite novamente"
+                  value={formData.confirmarSenha}
+                  onChange={handleInputChange}
+                  isInvalid={!!fieldErrors.confirmarSenha}
+                  disabled={isLoading}
+                />
+              </InputGroup>
+              {fieldErrors.confirmarSenha && (
+                <Form.Control.Feedback type="invalid">
+                  {fieldErrors.confirmarSenha}
+                </Form.Control.Feedback>
+              )}
+            </Form.Group>
+          </div>
+        </div>
+        
+        <Button
+          type="submit"
+          variant="primary"
+          size="lg"
+          className="w-100 auth-btn"
+          disabled={isLoading}
+        >
+          {isLoading ? (
+            <>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                className="me-2"
+              />
+              Registrando...
+            </>
+          ) : (
+            <>
+              <i className="fas fa-user-plus me-2"></i>
+              Registrar
+            </>
+          )}
+        </Button>
+      </Form>
+
+      <div className="text-center mt-4">
+        <p className="mb-0">
+          Já tem uma conta?{' '}
+          <Link 
+            to="/login" 
+            className="auth-link fw-bold"
+          >
+            Entrar
+          </Link>
+        </p>
+      </div>
+    </>
+  );
+
   return (
-    <div className="register-page">
-      <Container fluid>
-        <Row className="min-vh-100">
-          {/* Informações à esquerda */}
-          <Col lg={6} className="register-info-side d-none d-lg-flex">
-            <div className="register-info-content">
-              <div className="logo-container mb-4">
-                <h1 className="logo-text">TUPÃ-AÇU</h1>
-              </div>
-              <h2 className="info-title">
-                Cadastro de novo usuário
-              </h2>
-            </div>
-          </Col>
-
-          {/* Formulário à direita */}
-          <Col lg={6} className="register-form-side">
-            <div className="register-form-container">
-              <Card className="register-card">
-                <Card.Body className="p-5">
-                  <div className="text-center mb-4">
-                    <h3 className="register-title">Crie sua conta</h3>
-                    <p className="register-subtitle text-muted">
-                      Preencha os dados abaixo para registrar-se
-                    </p>
-                  </div>
-
-                  {localError && (
-                    <Alert variant="danger" className="mb-4" dismissible onClose={() => setLocalError('')}>
-                      <i className="fas fa-exclamation-triangle me-2"></i>
-                      {localError}
-                    </Alert>
-                  )}
-
-                  <Form onSubmit={handleSubmit} noValidate>
-                    <Form.Group className="mb-3">
-                      <Form.Label>Nome Completo</Form.Label>
-                      <InputGroup>
-                        <InputGroup.Text>
-                          <i className="fas fa-user"></i>
-                        </InputGroup.Text>
-                        <Form.Control
-                          type="text"
-                          name="nome"
-                          placeholder="Seu nome completo"
-                          value={formData.nome}
-                          onChange={handleInputChange}
-                          isInvalid={!!fieldErrors.nome}
-                          disabled={isLoading}
-                        />
-                      </InputGroup>
-                      {fieldErrors.nome && (
-                        <Form.Control.Feedback type="invalid">
-                          {fieldErrors.nome}
-                        </Form.Control.Feedback>
-                      )}
-                    </Form.Group>
-                    
-                    <Form.Group className="mb-3">
-                      <Form.Label>Email</Form.Label>
-                      <InputGroup>
-                        <InputGroup.Text>
-                          <i className="fas fa-envelope"></i>
-                        </InputGroup.Text>
-                        <Form.Control
-                          type="email"
-                          name="email"
-                          placeholder="seu@email.com"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          isInvalid={!!fieldErrors.email}
-                          disabled={isLoading}
-                        />
-                      </InputGroup>
-                      {fieldErrors.email && (
-                        <Form.Control.Feedback type="invalid">
-                          {fieldErrors.email}
-                        </Form.Control.Feedback>
-                      )}
-                    </Form.Group>
-                    
-                    <Form.Group className="mb-3">
-                      <Form.Label>CPF</Form.Label>
-                      <InputGroup>
-                        <InputGroup.Text>
-                          <i className="fas fa-id-card"></i>
-                        </InputGroup.Text>
-                        <Form.Control
-                          type="text"
-                          name="cpf"
-                          placeholder="000.000.000-00"
-                          value={getDisplayValue('cpf', formData.cpf)}
-                          onChange={handleInputChange}
-                          isInvalid={!!fieldErrors.cpf}
-                          disabled={isLoading}
-                          maxLength={14} // Com formatação
-                        />
-                      </InputGroup>
-                      {fieldErrors.cpf && (
-                        <Form.Control.Feedback type="invalid">
-                          {fieldErrors.cpf}
-                        </Form.Control.Feedback>
-                      )}
-                      <Form.Text className="text-muted">
-                        Apenas números
-                      </Form.Text>
-                    </Form.Group>
-                    
-                    <Form.Group className="mb-3">
-                      <Form.Label>Celular</Form.Label>
-                      <InputGroup>
-                        <InputGroup.Text>
-                          <i className="fas fa-phone"></i>
-                        </InputGroup.Text>
-                        <Form.Control
-                          type="text"
-                          name="celular"
-                          placeholder="(99) 99999-9999"
-                          value={getDisplayValue('celular', formData.celular)}
-                          onChange={handleInputChange}
-                          isInvalid={!!fieldErrors.celular}
-                          disabled={isLoading}
-                          maxLength={15} // Com formatação
-                        />
-                      </InputGroup>
-                      {fieldErrors.celular && (
-                        <Form.Control.Feedback type="invalid">
-                          {fieldErrors.celular}
-                        </Form.Control.Feedback>
-                      )}
-                      <Form.Text className="text-muted">
-                        Apenas números
-                      </Form.Text>
-                    </Form.Group>
-                    
-                    <Form.Group className="mb-3">
-                      <Form.Label>Senha</Form.Label>
-                      <InputGroup>
-                        <InputGroup.Text>
-                          <i className="fas fa-lock"></i>
-                        </InputGroup.Text>
-                        <Form.Control
-                          type="password"
-                          name="senha"
-                          placeholder="Mínimo 6 caracteres"
-                          value={formData.senha}
-                          onChange={handleInputChange}
-                          isInvalid={!!fieldErrors.senha}
-                          disabled={isLoading}
-                        />
-                      </InputGroup>
-                      {fieldErrors.senha && (
-                        <Form.Control.Feedback type="invalid">
-                          {fieldErrors.senha}
-                        </Form.Control.Feedback>
-                      )}
-                    </Form.Group>
-                    
-                    <Form.Group className="mb-4">
-                      <Form.Label>Confirmar Senha</Form.Label>
-                      <InputGroup>
-                        <InputGroup.Text>
-                          <i className="fas fa-lock"></i>
-                        </InputGroup.Text>
-                        <Form.Control
-                          type="password"
-                          name="confirmarSenha"
-                          placeholder="Digite a senha novamente"
-                          value={formData.confirmarSenha}
-                          onChange={handleInputChange}
-                          isInvalid={!!fieldErrors.confirmarSenha}
-                          disabled={isLoading}
-                        />
-                      </InputGroup>
-                      {fieldErrors.confirmarSenha && (
-                        <Form.Control.Feedback type="invalid">
-                          {fieldErrors.confirmarSenha}
-                        </Form.Control.Feedback>
-                      )}
-                    </Form.Group>
-                    
-                    <Button
-                      type="submit"
-                      variant="primary"
-                      size="lg"
-                      className="w-100 register-btn"
-                      disabled={isLoading}
-                    >
-                      {isLoading ? (
-                        <>
-                          <Spinner
-                            as="span"
-                            animation="border"
-                            size="sm"
-                            role="status"
-                            className="me-2"
-                          />
-                          Registrando...
-                        </>
-                      ) : (
-                        <>
-                          <i className="fas fa-user-plus me-2"></i>
-                          Registrar
-                        </>
-                      )}
-                    </Button>
-                  </Form>
-
-                  <div className="text-center mt-4">
-                    <p className="mb-0">
-                      Já tem uma conta?{' '}
-                      <Link 
-                        to="/login" 
-                        className="text-decoration-none fw-bold"
-                      >
-                        Entrar
-                      </Link>
-                    </p>
-                  </div>
-                </Card.Body>
-              </Card>
-
-              <div className="text-center mt-3">
-                <small className="text-muted">
-                  © 2024 SEDUC/MA - Sistema de Recepção v1.0.0
-                </small>
-              </div>
-            </div>
-          </Col>
-        </Row>
-      </Container>
-    </div>
+    <AuthLayout 
+      title="Cadastro de Usuário"
+      subtitle="Para acessar sua conta"
+    >
+      {formContent}
+    </AuthLayout>
   );
 };
 
